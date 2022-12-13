@@ -1,16 +1,22 @@
-from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic.edit import FormView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
-from django.urls import reverse_lazy
-# from django.urls import reverse
-from django.shortcuts import render, redirect
-
-
-# メールテスト用
-from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.views.generic import TemplateView
+from django.shortcuts import render
+from .forms import TestDataModelForm
 
 
 class IndexView(TemplateView):
     template_name: str = "app1/index.html"
+    form_class = TestDataModelForm
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            "form": self.form_class
+        }
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        context = {
+            "form": self.form_class
+        }
+
+        return render(request, self.template_name, context)
