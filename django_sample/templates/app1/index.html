@@ -6,13 +6,29 @@
     <h1>index page</h1>
     <br>
     <br>
-
+    {{ error_list }}
+  
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">送信</button>
+
+        <span>
+            <p>Number:
+            <input type="number" name="number" min="0">
+            </p>
+        </span>
+        <span>
+            <p>Name:
+            <input type="text" name="name" maxlength="200">
+            </p>
+        </span>
+        <span>
+            <p>Price:
+            <input type="number" name="price" min="0">
+            </p>
+        </span>
+
+        <button type="submit" name="submit">送信</button>
     </form>
 
 </div>
 {% endblock %}
-
