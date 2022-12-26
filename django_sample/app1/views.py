@@ -10,7 +10,7 @@ class IndexView(TemplateView, ModelFormMixin):
     # https://docs.djangoproject.com/en/4.1/ref/class-based-views/mixins-single-object/
     template_name: str = "app1/index.html"
     form_class = TestDataModelForm
-    success_url = reverse_lazy('app1:list')
+    success_url = reverse_lazy('app1:data_list')
     model = TestData
 
     def get(self, request, *args, **kwargs):
