@@ -1,43 +1,33 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
+from .forms import TestDataModelForm
 from .models import TestData
-from .forms import TestDataForm
 
 
 class IndexView(TemplateView):
     template_name: str = "app1/index.html"
-    form_class = TestDataForm
+    form_class = TestDataModelForm
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+    def get_context_data(self, **kwargs):
+        # get処理だけ書く
+        ctx = super().get_context_data(**kwargs)
+        ctx["form"] = self.form_class()
+        return ctx
 
     def post(self, request, *args, **kwargs) -> HttpResponse:
-
-        print(request.POST.get("number"))
-        print(type(request.POST.get("number")))
-
-        number = request.POST.get("number")
-        name = request.POST.get("name")
-        price = request.POST.get("price")
-
-        default_data = {
-            "number": number,
-            "name": name,
-            "price": price,
-        }
-        form = self.form_class(default_data)
-
+        form = self.form_class(request.POST)
         if form.is_valid():
-            print("ax")
-            TestData.objects.create(number=number, name=name, price=price)
+            form.save()
+            return redirect("app1:data_list")
         else:
-            print("aa")
-            print(f"error:{form.errors}")
+            context = {
+                "error_list": form.errors,
+            }
+            return render(request, self.template_name, context)
 
-        context = {
-                   "error_list": form.errors,
-                   }
 
-        return render(request, self.template_name, context)
+class DataListView(ListView):
+    template_name: str = "app1/data_list.html"
+    model = TestData
