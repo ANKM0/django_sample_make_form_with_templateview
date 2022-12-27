@@ -3,12 +3,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import TestData
-from .forms import TestDataForm
+from .forms import TestDataModelForm
 
 
 class IndexView(TemplateView):
     template_name: str = "app1/index.html"
-    form_class = TestDataForm
+    form_class = TestDataModelForm
 
     def post(self, request, *args, **kwargs) -> HttpResponse:
 
@@ -27,10 +27,8 @@ class IndexView(TemplateView):
         form = self.form_class(default_data)
 
         if form.is_valid():
-            print("ax")
-            TestData.objects.create(number=number, name=name, price=price)
+            form.save()
         else:
-            print("aa")
             print(f"error:{form.errors}")
 
         context = {
