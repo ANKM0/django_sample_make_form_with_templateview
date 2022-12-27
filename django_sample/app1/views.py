@@ -10,9 +10,6 @@ class IndexView(TemplateView):
     template_name: str = "app1/index.html"
     form_class = TestDataForm
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
-
     def post(self, request, *args, **kwargs) -> HttpResponse:
 
         print(request.POST.get("number"))
