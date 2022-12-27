@@ -1,8 +1,9 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from .forms import TestDataModelForm
+from .models import TestData
 
 
 class IndexView(TemplateView):
@@ -20,3 +21,8 @@ class IndexView(TemplateView):
         if form.is_valid():
             form.save()
             return redirect("app1:index")
+
+
+class DataListView(ListView):
+    template_name: str = "app1/data_list.html"
+    model = TestData
