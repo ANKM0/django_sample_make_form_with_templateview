@@ -1,18 +1,22 @@
 # django_sample_make_form_with_templateview
 Djangoのサンプルです <br>
-TemplateViewを使ってフォームを作る方法 のソースコードです <br>
+[【Django】 TemplateViewを使ってFormページを作る](https://qiita.com/ANKIM0/items/16940a4c4aeb91224b56)のソースコードです <br>
 
 <br>
 
 各ブランチは以下のようになっています
-- mainブランチ <br>
-get_context_dataメソッドをオーバーライドする方法
+- main <br>
+ModelFormMixinを使う方法
 
 - feature/#3ブランチ <br>
-inputタグからPostする方法
+From画面とロジックを自作する方法
 
 - feature/#6ブランチ <br>
 get/postメソッドをオーバーライドする方法
+
+
+- feature/#2 <br>
+get_context_dataメソッドをオーバーライドする方法
 
 
 # 導入方法 how to install
