@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from .models import TestData
 from .forms import TestDataForm
@@ -34,7 +34,12 @@ class IndexView(TemplateView):
             print(f"error:{form.errors}")
 
         context = {
-                   "error_list": form.errors,
-                   }
+            "error_list": form.errors,
+        }
 
         return render(request, self.template_name, context)
+
+
+class DataListView(ListView):
+    template_name: str = "app1/data_list.html"
+    model = TestData
