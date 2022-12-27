@@ -1,8 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from .forms import TestDataModelForm
+from .models import TestData
 
 
 class IndexView(TemplateView):
@@ -25,3 +26,8 @@ class IndexView(TemplateView):
         else:
             context = {"form": form}
             return render(request, self.template_name, context)
+
+
+class DataListView(ListView):
+    template_name: str = "app1/data_list.html"
+    model = TestData

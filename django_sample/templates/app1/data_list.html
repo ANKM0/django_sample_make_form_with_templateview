@@ -1,0 +1,20 @@
+{% extends "app1/base.html" %}
+{% block title %}index{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>index page</h1>
+    <br>
+    <br>
+    {{ error_list }}
+
+    {% for item in object_list %}
+    <ul>
+        <li>number: {{ item.number }}</li>
+        <li>name: {{ item.name }}</li>
+        <li>price: {{ item.price }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}
+
